@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Tip{
+enum Tip {
     case none
     case tenPercent
     case fifteenPercent
