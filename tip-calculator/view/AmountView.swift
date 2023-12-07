@@ -58,6 +58,13 @@ class AmountView: UIView {
         vStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
+    }
+    
+    func configure(text: String) {
+        let text = NSMutableAttributedString(
+            string: text,
+            attributes: [.font: ThemeFont.bold(ofSize: 24)])
+        text.addAttributes([.font: ThemeFont.bold(ofSize: 16)], range: NSMakeRange(0, 1))
+        amountLabel.attributedText = text
     }
 }

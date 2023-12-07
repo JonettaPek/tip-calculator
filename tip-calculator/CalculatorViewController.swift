@@ -52,8 +52,16 @@ class CalculatorViewController: UIViewController {
         let input = CalculatorViewModel.Input(
             billPublisher: billInputView.valuePublisher,
             tipPublisher: tipInputView.valuePublisher,
-            splitPublisher: Just(20).eraseToAnyPublisher())
+            splitPublisher: splitInputView.valuePublisher)
+        
         let output = calculatorViewModel.transform(input: input)
+        
+        output
+            .updateViewPublisher
+            .sink { [unowned self] result in
+                resultView.configure(result: result)
+            }
+            .store(in: &cancellables)
         
 //        output
 //            .updateViewPublisher
