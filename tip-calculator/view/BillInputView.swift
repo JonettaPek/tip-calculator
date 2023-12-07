@@ -65,7 +65,7 @@ class BillInputView: UIView {
     
     private let billSubject: PassthroughSubject<Double, Never> = .init()
     
-    var billPublisher: AnyPublisher<Double, Never> {
+    var valuePublisher: AnyPublisher<Double, Never> {
         return billSubject.eraseToAnyPublisher()
     }
     

@@ -9,6 +9,9 @@ import Foundation
 import Combine
 
 class CalculatorViewModel {
+    
+    private var cancellables = Set<AnyCancellable>()
+    
     struct Input {
         let billPublisher: AnyPublisher<Double, Never>
         let tipPublisher: AnyPublisher<Tip, Never>
@@ -20,6 +23,13 @@ class CalculatorViewModel {
     }
     
     func transform(input: Input) -> Output {
+//        input
+//            .billPublisher
+//            .sink { bill in
+//                print("the bill: \(bill)")
+//            }
+//            .store(in: &cancellables)
+        
         let result = Result(
             amountPerPerson: 50,
             totalBill: 500,
