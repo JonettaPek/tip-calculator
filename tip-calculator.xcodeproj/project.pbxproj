@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D423DB3C2B21C6CD00B82BFB /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D423DB3B2B21C6CD00B82BFB /* Double+Extension.swift */; };
 		D440E4032B1EC12D004D4A91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D440E4022B1EC12D004D4A91 /* AppDelegate.swift */; };
 		D440E4052B1EC12D004D4A91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D440E4042B1EC12D004D4A91 /* SceneDelegate.swift */; };
 		D440E4072B1EC12D004D4A91 /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D440E4062B1EC12D004D4A91 /* CalculatorViewController.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D423DB3B2B21C6CD00B82BFB /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		D440E3FF2B1EC12D004D4A91 /* tip-calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tip-calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D440E4022B1EC12D004D4A91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D440E4042B1EC12D004D4A91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				D46CC2562B20795000CBB253 /* String+Extension.swift */,
 				D4BFF4992B219A4600480108 /* UIResponder+Extension.swift */,
 				D4BFF49B2B21B40900480108 /* Int+Extension.swift */,
+				D423DB3B2B21C6CD00B82BFB /* Double+Extension.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				D440E4572B1EFF07004D4A91 /* ThemeFont.swift in Sources */,
 				D440E4052B1EC12D004D4A91 /* SceneDelegate.swift in Sources */,
 				D440E45D2B1F09CC004D4A91 /* LabelFactory.swift in Sources */,
+				D423DB3C2B21C6CD00B82BFB /* Double+Extension.swift in Sources */,
 				D46CC2532B2062AF00CBB253 /* CalculatorViewModel.swift in Sources */,
 				D46CC24E2B2056C400CBB253 /* Tip.swift in Sources */,
 				D440E44C2B1EEDBD004D4A91 /* SplitInputView.swift in Sources */,
