@@ -106,6 +106,7 @@ class TipInputView: UIView {
     init() {
         super.init(frame: .zero)
         layout()
+        observe()
     }
     
     required init?(coder: NSCoder) {
@@ -127,6 +128,33 @@ class TipInputView: UIView {
         }
     }
     
+    private func observe() {
+        tipSubject
+            .sink { [unowned self] tip in
+                resetView()
+                switch tip {
+                case .none:
+                    break
+                case .tenPercent:
+                    tenPercentTipButton.backgroundColor = ThemeColor.secondary
+                case .fifteenPercent:
+                    fifteenPercentTipButton.backgroundColor = ThemeColor.secondary
+                case .twentyPercent:
+                    twentyPercentTipButton.backgroundColor = ThemeColor.secondary
+                case .custom(let value):
+                    customTipButton.backgroundColor = ThemeColor.secondary
+                    let text = NSMutableAttributedString(
+                        string: "$\(value)",
+                        attributes: [.font: ThemeFont.bold(ofSize: 20)])
+                    text.addAttributes(
+                        [.font: ThemeFont.bold(ofSize: 14)],
+                        range: NSMakeRange(0, 1))
+                    customTipButton.setAttributedTitle(text, for: .normal)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
     private func handleCustomTipButton() {
         let alertController: UIAlertController = {
            let controller = UIAlertController(
@@ -135,7 +163,7 @@ class TipInputView: UIView {
             preferredStyle: .alert)
             
             controller.addTextField { textField in
-                textField.placeholder = "50"
+                textField.placeholder = "$50"
                 textField.keyboardType = .numberPad
                 textField.autocorrectionType = .no
             }
@@ -156,6 +184,21 @@ class TipInputView: UIView {
             return controller
         }()
         parentViewController?.present(alertController, animated: true)
+    }
+    
+    private func resetView() {
+        [tenPercentTipButton,
+         fifteenPercentTipButton,
+         twentyPercentTipButton,
+         customTipButton]
+            .forEach { button in
+                button.backgroundColor = ThemeColor.primary
+            }
+        
+        let text = NSMutableAttributedString(
+            string: "Custom tip",
+            attributes: [.font: ThemeFont.bold(ofSize: 20)])
+        customTipButton.setAttributedTitle(text, for: .normal)
     }
     
     private func buildTipButton(tip: Tip) -> UIButton {
