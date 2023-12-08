@@ -118,6 +118,11 @@ class BillInputView: UIView {
         }
     }
     
+    func reset() {
+        textField.text = nil
+        billSubject.send(0)
+    }
+    
     @objc private func doneButtonTapped() {
         textField.endEditing(true)
     }

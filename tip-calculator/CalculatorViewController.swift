@@ -39,7 +39,7 @@ class CalculatorViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: nil)
-        view.addGestureRecognizer(tapGesture)
+        logoView.addGestureRecognizer(tapGesture)
         return tapGesture
             .tapPublisher
             .flatMap { _ in
@@ -95,8 +95,23 @@ class CalculatorViewController: UIViewController {
         
         output
             .resetCalculatorPublisher
-            .sink { _ in
-                print("reset form please")
+            .sink { [unowned self] _ in
+                billInputView.reset()
+                tipInputView.reset()
+                splitInputView.reset()
+                
+                UIView.animate(
+                    withDuration: 0.1,
+                    delay: 0,
+                    usingSpringWithDamping: 5.0,
+                    initialSpringVelocity: 0.5,
+                    options: .curveEaseInOut) {
+                        self.logoView.transform = .init(scaleX: 1.5, y: 1.5)
+                    } completion: { _ in
+                        UIView.animate(withDuration: 0.1) {
+                            self.logoView.transform = .identity
+                        }
+                    }
             }
             .store(in: &cancellables)
         

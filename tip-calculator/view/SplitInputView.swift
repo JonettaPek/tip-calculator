@@ -111,6 +111,10 @@ class SplitInputView: UIView {
             .store(in: &cancellables)
     }
     
+    func reset() {
+        splitSubject.send(1)
+    }
+    
     private func buildButton(text: String, corners: CACornerMask) -> UIButton {
         let button = UIButton()
         button.setTitle(text, for: .normal)
