@@ -48,6 +48,20 @@ class CalculatorViewController: UIViewController {
             .eraseToAnyPublisher()
     }()
     
+    private lazy var logoViewTapPublisher: AnyPublisher<Void, Never> = {
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: nil)
+        tapGesture.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tapGesture)
+        return tapGesture
+            .tapPublisher
+            .flatMap { _ in
+                Just(())
+            }
+            .eraseToAnyPublisher()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -67,7 +81,8 @@ class CalculatorViewController: UIViewController {
         let input = CalculatorViewModel.Input(
             billPublisher: billInputView.valuePublisher,
             tipPublisher: tipInputView.valuePublisher,
-            splitPublisher: splitInputView.valuePublisher)
+            splitPublisher: splitInputView.valuePublisher, 
+            logoViewTapPublisher: logoViewTapPublisher)
         
         let output = calculatorViewModel.transform(input: input)
         
@@ -75,6 +90,13 @@ class CalculatorViewController: UIViewController {
             .updateViewPublisher
             .sink { [unowned self] result in
                 resultView.configure(result: result)
+            }
+            .store(in: &cancellables)
+        
+        output
+            .resetCalculatorPublisher
+            .sink { _ in
+                print("reset form please")
             }
             .store(in: &cancellables)
         
